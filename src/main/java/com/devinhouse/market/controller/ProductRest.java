@@ -4,10 +4,11 @@ import com.devinhouse.market.model.transport.ProductDTO;
 import com.devinhouse.market.service.ProductService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.persistence.GeneratedValue;
+import javax.websocket.server.PathParam;
+import java.util.List;
 
 @RestController
 @RequestMapping("/product")
@@ -22,6 +23,21 @@ public class ProductRest {
     @PostMapping("/create")
     public ResponseEntity<HttpStatus> create(@RequestBody ProductDTO product) {
         return productService.create(product);
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<HttpStatus> update(@RequestBody ProductDTO product) {
+        return productService.update(product);
+    }
+
+    @GetMapping("/list")
+    public List<ProductDTO> listAll() {
+        return this.productService.listAll();
+    }
+
+    @DeleteMapping("/delete/{identifier}")
+    public ResponseEntity<HttpStatus> delete(@PathVariable String identifier) {
+        return this.productService.delete(identifier);
     }
 
 }

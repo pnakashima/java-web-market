@@ -12,13 +12,16 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String identifier;
+
     private String name;
 
     private String description;
 
     private BigDecimal price;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="category_id")  // liga o atributo do banco (category_id) com o atributo category
     private Category category;
 
 
@@ -38,10 +41,15 @@ public class Product {
         this.description = productDTO.getDescription();
         this.price = productDTO.getPrice();
         this.category = productDTO.getCategoryDTO().generatePersistence();
+        this.identifier = productDTO.getIdentifier();
     }
 
     public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -74,5 +82,13 @@ public class Product {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
     }
 }

@@ -1,10 +1,13 @@
 package com.devinhouse.market.model.transport;
 
 import com.devinhouse.market.model.persistence.Product;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.math.BigDecimal;
 
 public class ProductDTO {
+
+    private String identifier;
 
     private String name;
 
@@ -12,6 +15,7 @@ public class ProductDTO {
 
     private BigDecimal price;
 
+    @JsonProperty("category")  // com essa anotacao, qdo vem do front end um json com category, o java ja sabe q é o categoryDTO
     private CategoryDTO categoryDTO;
 
     public ProductDTO() {
@@ -29,6 +33,7 @@ public class ProductDTO {
         this.description = product.getDescription();
         this.price = product.getPrice();
         this.categoryDTO = product.getCategory().generateTransportObject();
+        this.identifier = product.getIdentifier();
     }
 
     public String getName() {
@@ -61,5 +66,13 @@ public class ProductDTO {
 
     public void setCategoryDTO(CategoryDTO categoryDTO) {
         this.categoryDTO = categoryDTO;
+    }
+
+    public String getIdentifier() {
+        return identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
     }
 }
