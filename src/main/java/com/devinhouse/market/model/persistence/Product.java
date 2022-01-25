@@ -14,6 +14,7 @@ public class Product {
 
     private String identifier;
 
+    @Column(unique = true, nullable = false)
     private String name;
 
     private String description;
@@ -91,4 +92,5 @@ public class Product {
     public void setIdentifier(String identifier) {
         this.identifier = identifier;
     }
+
 }

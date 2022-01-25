@@ -25,9 +25,9 @@ public class ProductRest {
         return productService.create(product);
     }
 
-    @PutMapping("/update")
-    public ResponseEntity<HttpStatus> update(@RequestBody ProductDTO product) {
-        return productService.update(product);
+    @PutMapping("/update/{identifier}")
+    public ResponseEntity<HttpStatus> update(@RequestBody ProductDTO product, @PathVariable String identifier) {
+        return productService.update(product, identifier);
     }
 
     @GetMapping("/list")
@@ -38,6 +38,11 @@ public class ProductRest {
     @DeleteMapping("/delete/{identifier}")
     public ResponseEntity<HttpStatus> delete(@PathVariable String identifier) {
         return this.productService.delete(identifier);
+    }
+
+    @GetMapping("/{identifier}")
+    public ProductDTO getProduct(@PathVariable String identifier) throws Exception {
+        return this.productService.getProductByIdentifier(identifier);
     }
 
 }
