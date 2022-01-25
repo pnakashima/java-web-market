@@ -25,7 +25,6 @@ public class Product {
     @JoinColumn(name="category_id")  // liga o atributo do banco (category_id) com o atributo category
     private Category category;
 
-
     public Product() {
     }
 
